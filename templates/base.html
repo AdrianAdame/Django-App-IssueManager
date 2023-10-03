@@ -1,4 +1,3 @@
-{% load compress %}
 {% load static %}
 
 <!DOCTYPE html>
@@ -10,9 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock title %}</title>
 
-    {% compress css %}
     <link rel="stylesheet" href="{% static 'src/css/output.css' %}">
-    {% endcompress %}
 
 </head>
 
@@ -89,9 +86,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
     <script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script>
     
-    {% compress js %}
     <script src="{% static 'src/js/index.js' %}"></script>
-    {% endcompress %}
 </body>
 
 </html>

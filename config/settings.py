@@ -29,6 +29,8 @@ SECRET_KEY = env.str("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DEBUG", default = False)
 
+DEBUG_PROPAGATE_EXCEPTIONS = True
+
 ALLOWED_HOSTS = ["127.0.0.1", "localhost", ".herokuapp.com"]
 
 
@@ -43,7 +45,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     "crispy_tailwind",
-    "compressor",
     'accounts',
     'pages',
     'issues'
@@ -127,7 +128,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_FILES_DIRS = [str(BASE_DIR.joinpath("static"))]
+STATICFILES_DIRS = [str(BASE_DIR.joinpath("static"))]
 STATIC_ROOT = str(BASE_DIR.joinpath("staticfiles"))
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
@@ -135,18 +136,6 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-#Django Compressor configuration
-
-COMPRESS_ROOT = str(BASE_DIR.joinpath("static"))
-
-COMPRESS_ENABLED = True
-
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'compressor.finders.CompressorFinder',
-)
 
 #Django crispy forms configuration
 
