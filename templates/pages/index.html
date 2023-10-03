@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="bg-blue-900 text-white py-16">
+    <div class="container mx-auto text-center">
+        <h1 class="text-4xl md:text-6xl font-semibold mb-4">Achieve Workflow Excellence with Kanbango</h1>
+        <p class="text-lg md:text-xl mb-8">Your Premier Kanban Board Management Solution</p>
+        <a href="#get-started" class="btn btn-primary">Get Started</a>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section id="features" class="py-16">
+    <div class="container mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <!-- Feature 1 -->
+            <div class="p-4">
+                <div class="icon-box icon-box-primary mb-4">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h2 class="text-2xl font-semibold mb-4">Effortless Organization</h2>
+                <p class="text-gray-700">Experience the joy of visualizing your tasks, projects, and goals on a beautifully designed Kanban board.</p>
+            </div>
+            <!-- Feature 2 -->
+            <div class="p-4">
+                <div class="icon-box icon-box-primary mb-4">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h2 class="text-2xl font-semibold mb-4">Boost Team Collaboration</h2>
+                <p class="text-gray-700">Enhance communication and collaboration among your team members with real-time updates and shared boards.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pricing Section -->
+<section id="pricing" class="bg-gray-100 py-16">
+    <div class="container mx-auto text-center">
+        <h2 class="text-4xl font-semibold mb-8">Pricing That Fits Your Needs</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <!-- Pricing Card 1 -->
+            <div class="p-4">
+                <div class="pricing-card bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold mb-2">Starter</h3>
+                    <p class="text-gray-600 mb-4">Free forever for small teams and personal use.</p>
+                    <a href="#" class="btn btn-primary">Get Started</a>
+                </div>
+            </div>
+            <!-- Pricing Card 2 -->
+            <div class="p-4">
+                <div class="pricing-card bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold mb-2">Pro</h3>
+                    <p class="text-gray-600 mb-4">Unlock advanced features for just $9/month per user.</p>
+                    <a href="#" class="btn btn-primary">Get Started</a>
+                </div>
+            </div>
+            <!-- Pricing Card 3 -->
+            <div class="p-4">
+                <div class="pricing-card bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold mb-2">Enterprise</h3>
+                    <p class="text-gray-600 mb-4">Tailored solutions for larger organizations. Contact us for a custom quote.</p>
+                    <a href="#" class="btn btn-primary">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="bg-blue-900 text-white py-16">
+    <div class="container mx-auto text-center">
+        <h2 class="text-4xl font-semibold mb-8">Have Questions? Contact Us!</h2>
+        <p class="text-lg md:text-xl mb-8">If you have any questions or need assistance, our dedicated support team is here to help.</p>
+        <p class="text-2xl">Email: support@kanbango.com</p>
+        <p class="text-2xl">Phone: (123) 456-7890</p>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-700 text-white py-8">
+    <div class="container mx-auto text-center">
+        <p>&copy; 2023 Kanbango</p>
+    </div>
+</footer>
+{% endblock content %}

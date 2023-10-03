@@ -1,0 +1,270 @@
+{% extends 'base.html' %}
+
+{% block title %}Posts{% endblock title %}
+
+{% block content %}
+<div class="container mx-auto px-4 text-center">
+	<h1
+		class="mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl dark:text-white">
+		Kanban Board Visualization</h1>
+	<p class="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Here is a brief
+		visualization of the project currently managin,
+		you can visualize, move, delete or edit tasks/issues as you need.
+	</p>
+	<a href="{% url 'new' %}"
+		class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+		Add an Issue
+		<svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+			viewBox="0 0 18 18">
+			<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+				d="M9 1v16M1 9h16" />
+		</svg>
+	</a>
+</div>
+<div class="container mx-auto px-4">
+	<div class="flex mb-4 m-4 gap-4">
+		<div class="flex-1 bg-blue-200/100 h-full rounded-lg">
+			<h1
+				class="mb-4 text-xl text-center font-bold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-3xl dark:text-white">
+				TO DO</h1>
+			<div class="grid grid-cols-1 gap-4 px-4 mb-4" id="todo_list">
+				{% for issue in todo_issue_list %}
+				<div name="{{issue.id}}" draggable="true"
+					class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+					<div class="flex flex-row-reverse space-x-4 space-x-reverse mb-2 items-center">
+						<span
+							class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2 dark:bg-gray-700 dark:text-gray-400 border border-gray-500">
+							<svg class="w-2.5 h-2.5 mr-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+								fill="currentColor" viewBox="0 0 20 20">
+								<path
+									d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm3.982 13.982a1 1 0 0 1-1.414 0l-3.274-3.274A1.012 1.012 0 0 1 9 10V6a1 1 0 0 1 2 0v3.586l2.982 2.982a1 1 0 0 1 0 1.414Z" />
+							</svg>
+							{{issue.created_on}}
+						</span>
+						<span
+							class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2 dark:bg-gray-700 dark:text-gray-400 border border-gray-500">
+							<svg class="w-2.5 h-2.5 mr-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+								fill="currentColor" viewBox="0 0 20 20">
+								<path
+									d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z" />
+							</svg>
+							{{issue.assignee}}
+						</span>
+					</div>
+					<p class="text-xs text-gray-900 dark:text-white">Summary</p>
+					<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{issue.summary}}
+					</h5>
+					<p class="text-xs text-gray-900 dark:text-white mt-4">Description</p>
+					<p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{issue.description}}</p>
+					{% if issue.priority.name == "high" %}
+					<span
+						class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300 capitalize">{{issue.priority}}
+						Priority</span>
+					{% elif issue.priority.name == "medium" %}
+					<span
+						class="bg-yellow-100 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-yellow-900 dark:text-yellow-300 capitalize">{{issue.priority}}
+						Priority</span>
+					{% else %}
+					<span
+						class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300 capitalize">{{issue.priority}}
+						Priority</span>
+					{% endif %}
+					<a href="{% url 'detail' issue.id %}"
+						class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+						Read more
+						<svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+							viewBox="0 0 14 10">
+							<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+								d="M1 5h12m0 0L9 1m4 4L9 9" />
+						</svg>
+					</a>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="flex-1 bg-blue-200/75 h-full rounded-lg">
+			<h1
+				class="mb-4 text-xl text-center font-bold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-3xl dark:text-white">
+				IN PROGRESS</h1>
+			<div class="grid grid-cols-1 gap-4 px-4 mb-4" id="inprogress_list">
+				{% for issue in inprogress_issue_list %}
+
+				<div name="{{issue.id}}" draggable="true"
+					class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+					<div class="flex flex-row-reverse space-x-4 space-x-reverse mb-2 items-center">
+						<span
+							class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2 dark:bg-gray-700 dark:text-gray-400 border border-gray-500">
+							<svg class="w-2.5 h-2.5 mr-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+								fill="currentColor" viewBox="0 0 20 20">
+								<path
+									d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm3.982 13.982a1 1 0 0 1-1.414 0l-3.274-3.274A1.012 1.012 0 0 1 9 10V6a1 1 0 0 1 2 0v3.586l2.982 2.982a1 1 0 0 1 0 1.414Z" />
+							</svg>
+							{{issue.created_on}}
+						</span>
+						<span
+							class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2 dark:bg-gray-700 dark:text-gray-400 border border-gray-500">
+							<svg class="w-2.5 h-2.5 mr-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+								fill="currentColor" viewBox="0 0 20 20">
+								<path
+									d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z" />
+							</svg>
+							{{issue.assignee}}
+						</span>
+					</div>
+					<p class="text-xs text-gray-900 dark:text-white">Summary</p>
+					<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{issue.summary}}
+					</h5>
+					<p class="text-xs text-gray-900 dark:text-white mt-4">Description</p>
+					<p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{issue.description}}</p>
+					{% if issue.priority.name == "high" %}
+					<span
+						class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300 capitalize">{{issue.priority}}
+						Priority</span>
+					{% elif issue.priority.name == "medium" %}
+					<span
+						class="bg-yellow-100 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-yellow-900 dark:text-yellow-300 capitalize">{{issue.priority}}
+						Priority</span>
+					{% else %}
+					<span
+						class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300 capitalize">{{issue.priority}}
+						Priority</span>
+					{% endif %}
+					<a href="{% url 'detail' issue.id %}"
+						class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+						Read more
+						<svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+							viewBox="0 0 14 10">
+							<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+								d="M1 5h12m0 0L9 1m4 4L9 9" />
+						</svg>
+					</a>
+				</div>
+
+				{% endfor %}
+			</div>
+		</div>
+		<div class="flex-1 bg-blue-200/50 h-full rounded-lg">
+			<h1
+				class="mb-4 text-xl text-center font-bold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-3xl dark:text-white">
+				DONE</h1>
+			<div class="grid grid-cols-1 gap-4 px-4 mb-4" id="done_list">
+				{% for issue in done_issue_list %}
+
+				<div name="{{issue.id}}" draggable="true"
+					class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+					<div class="flex flex-row-reverse space-x-4 space-x-reverse mb-2 items-center">
+						<span
+							class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2 dark:bg-gray-700 dark:text-gray-400 border border-gray-500">
+							<svg class="w-2.5 h-2.5 mr-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+								fill="currentColor" viewBox="0 0 20 20">
+								<path
+									d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm3.982 13.982a1 1 0 0 1-1.414 0l-3.274-3.274A1.012 1.012 0 0 1 9 10V6a1 1 0 0 1 2 0v3.586l2.982 2.982a1 1 0 0 1 0 1.414Z" />
+							</svg>
+							{{issue.created_on}}
+						</span>
+						<span
+							class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2 dark:bg-gray-700 dark:text-gray-400 border border-gray-500">
+							<svg class="w-2.5 h-2.5 mr-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+								fill="currentColor" viewBox="0 0 20 20">
+								<path
+									d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z" />
+							</svg>
+							{{issue.assignee}}
+						</span>
+					</div>
+					<p class="text-xs text-gray-900 dark:text-white">Summary</p>
+					<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{issue.summary}}
+					</h5>
+					<p class="text-xs text-gray-900 dark:text-white mt-4">Description</p>
+					<p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{issue.description}}</p>
+					{% if issue.priority.name == "high" %}
+					<span
+						class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300 capitalize">{{issue.priority}}
+						Priority</span>
+					{% elif issue.priority.name == "medium" %}
+					<span
+						class="bg-yellow-100 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-yellow-900 dark:text-yellow-300 capitalize">{{issue.priority}}
+						Priority</span>
+					{% else %}
+					<span
+						class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300 capitalize">{{issue.priority}}
+						Priority</span>
+					{% endif %}
+					<a href="{% url 'detail' issue.id %}"
+						class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+						Read more
+						<svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+							viewBox="0 0 14 10">
+							<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+								d="M1 5h12m0 0L9 1m4 4L9 9" />
+						</svg>
+					</a>
+				</div>
+
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	function getCookie(name) {
+		var cookieValue = null;
+		if (document.cookie && document.cookie !== '') {
+			var cookies = document.cookie.split(';');
+			for (var i = 0; i < cookies.length; i++) {
+				var cookie = cookies[i].trim();
+				// Does this cookie string begin with the name we want?
+				if (cookie.substring(0, name.length + 1) === (name + '=')) {
+					cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+					break;
+				}
+			}
+		}
+		return cookieValue;
+	}
+
+	const changeIssueStatus = (evt) => {
+
+		let newStatus = evt.to.id.split('_')[0]
+
+		if (evt.to.id.split('_')[0] === "inprogress") {
+			newStatus = "in progress"
+		}
+
+		if (evt.to.id.split('_')[0] === "todo") {
+			newStatus = "to do"
+		}
+
+		let csrfToken = getCookie('csrftoken')
+		const req = new XMLHttpRequest()
+		req.open('POST', ``, true)
+		req.setRequestHeader("X-CSRFToken", csrfToken)
+		req.setRequestHeader("Content-Type", "application/json")
+		req.send(JSON.stringify({
+			"id": evt.item.getAttribute('name'),
+			"status": newStatus
+		}))
+	}
+
+	window.onload = () => {
+		Sortable.create(document.getElementById('todo_list'), {
+			group: 'shared',
+			animation: 350,
+			onEnd: changeIssueStatus
+		})
+
+		Sortable.create(document.getElementById('inprogress_list'), {
+			group: 'shared', // set both lists to same group
+			animation: 350,
+			onEnd: changeIssueStatus
+		})
+
+		Sortable.create(document.getElementById('done_list'), {
+			group: 'shared', // set both lists to same group
+			animation: 350,
+			onEnd: changeIssueStatus
+		})
+	}
+</script>
+{% endblock content %}
