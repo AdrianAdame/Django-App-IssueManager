@@ -1,7 +1,6 @@
 venv/
 node_modules/
 *__pycache__*
-static/CACHE/
 staticfiles/
 .env
 deploy_setup.sh
