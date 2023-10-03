@@ -4,3 +4,4 @@ node_modules/
 static/CACHE/
 staticfiles/
 .env
+deploy_setup.sh
